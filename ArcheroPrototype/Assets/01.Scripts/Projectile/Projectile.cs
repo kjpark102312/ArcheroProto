@@ -4,25 +4,61 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float speed = 1000f;
-    
+
+    [SerializeField] private float speed = 600f;
+    [SerializeField] private float damage = 1f;
+
     private Rigidbody rb = null;
+    private WeaponAbilityManager weaponAbility = null;
 
-    public Ability[] abilities;
 
-    private void Start()
+    private float timer = 0f;
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        abilities = GetComponents<Ability>();
+        weaponAbility = GetComponent<WeaponAbilityManager>();
+    }
+    private void Start()
+    {
         rb.AddForce(transform.forward * speed);
+        timer = 0f;
+    }
+
+    private void OnEnable()
+    {
+        rb.AddForce(transform.forward * speed);
+        timer = 0f;
+
+        Debug.Log("시작");
+    }
+
+    private void Update()
+    {
+        if(gameObject.activeSelf)
+            timer += Time.deltaTime;
+        if (timer > 1.5f)
+        {
+            this.gameObject.SetActive(false);
+            rb.velocity = Vector3.zero;
+        }
+
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Enemy"))
         {
-            Debug.Log("피격!!");
+            other.GetComponent<Enemy>().hp -= damage;
+
+            if(weaponAbility.abilityList.Count > 0)
+            {
+                weaponAbility.ApplyAbility(other.GetComponent<Enemy>());
+            }
+
             this.gameObject.SetActive(false);
+            rb.velocity = Vector3.zero;
         }
     }
 }

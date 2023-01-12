@@ -25,9 +25,10 @@ public class PoolManager : MonoBehaviour
 
 
     [SerializeField] private GameObject poolObj = null;
-    [SerializeField] private List<GameObject> poolLists = new List<GameObject>();
+    public List<GameObject> PoolList { get { return poolLists; } private set { } }
+    private List<GameObject> poolLists = new List<GameObject>();
 
-    private int index = 0;
+    [SerializeField] private int index = 0;
 
 
 
@@ -45,32 +46,34 @@ public class PoolManager : MonoBehaviour
         _obj.SetActive(false);
         poolLists.Add(_obj);
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 20; i++)
         {
-            Instantiate(_obj);
+            GameObject _objClone = Instantiate(_obj);
 
-            _obj.SetActive(false);
-            poolLists.Add(_obj);
+            _objClone.SetActive(false);
+            poolLists.Add(_objClone);
         }
 
         instance = this;
     }
 
-    public void UseObj(Vector3 pos,Quaternion rot)
+    public void UseObj(Vector3 _pos,Quaternion _rot)
     {
-        if (index > poolLists.Count)
+        if (index >= poolLists.Count)
             index = 0;
         if (poolLists[index].activeSelf)
         {
-            UseObj(pos, rot);
             index++;
+            UseObj(_pos, _rot);
+
+            Debug.Log("¾Æ¾Æ");
             return;
         }
 
-        poolLists[index].transform.position = pos;
-        poolLists[index].transform.rotation = rot 
-  ;
+        poolLists[index].transform.position = _pos;
+        poolLists[index].transform.rotation = _rot;
         poolLists[index].SetActive(true);
+       
         index++;
     }
 

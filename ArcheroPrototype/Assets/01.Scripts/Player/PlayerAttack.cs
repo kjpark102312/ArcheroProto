@@ -14,18 +14,18 @@ public class PlayerAttack : MonoBehaviour
     public GameObject targetEnemy = null;
 
     private PlayerMove playerMove = null;
+    private AbilityManager abilityManager = null;
 
-    
-
+    public Vector3 shotPos = Vector3.zero;
     void Start()
     {
         playerMove = GetComponent<PlayerMove>();
+        abilityManager = GetComponent<AbilityManager>();
         enemies = enemySpawner.cloneEnemies.ToArray();
     }
 
     void Update()
     {
-
         if (playerMove.IsMove == false)
         {
             coolTime += Time.deltaTime;
@@ -49,6 +49,8 @@ public class PlayerAttack : MonoBehaviour
     public void Attack()
     {
         coolTime = 0f;
-        PoolManager.Instance.UseObj(transform.position, transform.rotation);
+        PoolManager.Instance.UseObj(transform.position + shotPos, transform.rotation);
+        Debug.Log("SHOT!!!");   
+        abilityManager.ApplyAbility();
     }
 }

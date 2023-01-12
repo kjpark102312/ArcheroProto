@@ -1,34 +1,33 @@
-using OpenCover.Framework.Model;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
-
 public class AbilityManager : MonoBehaviour
 {
-    [SerializeField] private Dictionary<string, Ability> abilities = new Dictionary<string, Ability>();
+
+    [System.Serializable]
+    public class SerializeDicEntity : CustomDic.SerializableDictionary<string, Ability> { }
+    public SerializeDicEntity abilityDic;
+
 
     public List<Ability> abilityList = new List<Ability>();
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
-
-    public void ApplyAbility(GameObject _projectile)
+    public void ApplyAbility()
     {
         if (abilityList.Count > 0)
         {
             for (int i = 0; i < abilityList.Count; i++)
             {
-                _projectile.AddComponent<Rigidbody>();
+                abilityList[i].AbilityMerge(this);
             }
         }
     }
 
     public void SelectAbility()
     {
-        string _abilityName = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().text;
+        string _abilityName = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TextMeshProUGUI>().text;
+
+        abilityList.Add(abilityDic[_abilityName]);
     }
 }

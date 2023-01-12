@@ -14,12 +14,10 @@ GameObject:
   - component: {fileID: 8752302478721663277}
   - component: {fileID: 4236834498098983985}
   - component: {fileID: -7514968104941657228}
-  - component: {fileID: 9213978889454363429}
-  - component: {fileID: 5512047555160443543}
-  - component: {fileID: 1216822580050822950}
+  - component: {fileID: 2475486411178284118}
   m_Layer: 7
   m_Name: Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed20db85b481e304cae4edc7cf79ee16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1000
---- !u!114 &9213978889454363429
+  speed: 600
+--- !u!114 &2475486411178284118
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,30 +138,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8752302478721663266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a43eec3c6516884da5254550921d551, type: 3}
+  m_Script: {fileID: 11500000, guid: e963be80270e2cd45b761a22326dcc75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5512047555160443543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8752302478721663266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68635e064a7f8234e967d7ca561d6518, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1216822580050822950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8752302478721663266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37969b63cbc5a224695cd79950d73dc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  abilityDic:
+    g_InspectorKeys:
+    - FireArrow
+    g_InspectorValues:
+    - {fileID: 11400000, guid: a45f7e5d44ec2af48b4281fc4cb9fa87, type: 2}
+  abilityList: []
